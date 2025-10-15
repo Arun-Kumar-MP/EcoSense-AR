@@ -1,0 +1,6 @@
+# pip install -r requirements.txt
+
+Flask==3.0.3
+Flask-SQLAlchemy==3.1.1
+SQLAlchemy==2.0.36
+pyserial==3.5
