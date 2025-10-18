@@ -18,7 +18,8 @@
                     <th>Timestamp</th>
                     <th>Temperature (°C)</th>
                     <th>Humidity (%)</th>
-                    <th>Rs/R₀ Ratio</th>
+                    <th>Air Index</th>
+                    <th>Illuminance (lx)</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,11 +29,12 @@
                     <td>{{ reading.timestamp.strftime('%Y-%m-%d %H:%M:%S') if reading.timestamp else '' }}</td>
                     <td>{{ reading.temperature }}</td>
                     <td>{{ reading.humidity }}</td>
-                    <td>{{ reading.ratio }}</td>
+                    <td>{{ reading.air_index }}</td>
+                    <td>{{ reading.lux }}</td>
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="5">No readings available.</td>
+                    <td colspan="6">No readings available.</td>
                 </tr>
                 {% endfor %}
             </tbody>

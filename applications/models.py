@@ -7,4 +7,5 @@ class SensorReading(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     temperature = db.Column(db.Float, nullable=False)
     humidity = db.Column(db.Float, nullable=False)
-    ratio = db.Column(db.Float, nullable=False)
+    air_index = db.Column(db.Float, nullable=False)
+    lux = db.Column(db.Float, nullable=False)

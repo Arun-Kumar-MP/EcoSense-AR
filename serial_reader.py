@@ -23,16 +23,17 @@ def read_from_serial(port="COM4", baudrate=9600):
                 line = ser.readline().decode('utf-8', errors='ignore').strip()
                 if line:
                     parts = line.split(",")
-                    if len(parts) == 3:
-                        temp, hum, ratio = map(float, parts)
+                    if len(parts) == 4:
+                        temp, hum, air_index, lux = map(float, parts)
                         reading = SensorReading(
                             temperature=temp,
                             humidity=hum,
-                            ratio=ratio
+                            air_index=air_index,
+                            lux=lux
                         )
                         db.session.add(reading)
                         db.session.commit()
-                        print(f"Saved: Temp={temp}°C, Humidity={hum}%, Ratio={ratio}")
+                        print(f"Saved: Temp={temp}°C, Humidity={hum}%, Air_Index={air_index}, LUX={lux}")
             except Exception as e:
                 print("Error reading serial data:", e)
 
