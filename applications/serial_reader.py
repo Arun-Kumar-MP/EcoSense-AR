@@ -30,8 +30,14 @@ def read_n_values(port="COM4", baudrate=9600, n=10):
                     )
                     db.session.add(reading)
                     db.session.commit()
-                    readings.append(reading)
+                    readings.append({
+                        "temperature": temp,
+                        "humidity": hum,
+                        "air_index": air_index,
+                        "lux": lux
+                    })
                     print(f"Saved: {temp}°C, {hum}%, {air_index}, {lux} lx")
+
         except Exception as e:
             print("Error reading serial data:", e)
     return readings
