@@ -1,0 +1,132 @@
+body {
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+}
+
+.container-app {
+    max-width: 420px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card-glass {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.btn-main {
+    background: #00c853;
+    border: none;
+    width: 100%;
+    padding: 14px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 10px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.score-good {
+    border-color: #00e676;
+    color: #00e676;
+}
+
+.score-medium {
+    border-color: #ffb300;
+    color: #ffb300;
+}
+
+.score-bad {
+    border-color: #ff5252;
+    color: #ff5252;
+}
+
+.score-label {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.plant-name {
+    margin-top: 10px;
+    color: #00e676;
+}
+
+.plant-img {
+    max-height: 200px;
+    width: 100%;
+    object-fit: contain;
+    margin: 15px 0;
+    border-radius: 10px;
+}
+
+.section-title {
+    margin-top: 20px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.metric {
+    margin-top: 10px;
+    text-align: left;
+}
+
+.bar {
+    height: 10px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.temp { background: #00e5ff; }
+.hum  { background: #00c853; }
+.lux  { background: #ffeb3b; }
+.air  { background: #ff5252; }
+
+.survival {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.actions {
+    margin-top: 10px;
+    padding-left: 18px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform: translateY(10px);}
+    to {opacity:1; transform: translateY(0);}
+}
