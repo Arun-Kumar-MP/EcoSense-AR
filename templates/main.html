@@ -1,130 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoSense</title>
+    <title>EcoSense | Decision Intelligence</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 
 <body>
-
     <div class="container-app">
         <div class="card-glass text-center">
-
-            <!-- Header -->
             <h3>🌿 EcoSense</h3>
             <p class="subtitle">Environmental Decision Intelligence</p>
 
-            <!-- Capture Button -->
-            <a href="#" id="captureBtn" class="btn btn-main mt-3">
-                Capture & Analyze
-            </a>
+            <a href="#" id="captureBtn" class="btn btn-main mt-3">Capture & Analyze</a>
 
             <script>
                 document.getElementById("captureBtn").addEventListener("click", function(e) {
                     e.preventDefault();
-                    let btn = this;
-                    btn.disabled = true;
-                    btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Analyzing...';
+                    this.classList.add("disabled");
+                    this.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Analyzing...';
                     window.location.href = "{{ url_for('controllers.capture_and_recommend') }}";
                 });
             </script>
 
-            <!-- Show Results Only If Data Exists -->
             {% if recommendation %}
-
             <div class="fade-in">
-
-                <!-- Score Circle -->
-                <div class="score-circle
-                    {% if score is defined %}
-                        {% if score >= 75 %}
-                            score-good
-                        {% elif score >= 50 %}
-                            score-medium
-                        {% else %}
-                            score-bad
-                        {% endif %}
-                    {% endif %}
-                ">
-                    <span>
-                        {% if score is defined %}
-                            {{ score }}
-                        {% else %}
-                            --
-                        {% endif %}
-                    </span>
+                <div class="score-circle {% if score >= 75 %}score-good{% elif score >= 50 %}score-medium{% else %}score-bad{% endif %}">
+                    <span>{{ score }}%</span>
                 </div>
-
                 <p class="score-label">Environmental Suitability Score</p>
 
-                <!-- Plant Name -->
                 <h4 class="plant-name">{{ recommendation }}</h4>
 
-                <!-- Plant Image -->
-                <img 
-                    src="{{ url_for('static', filename='assets/' + recommendation|replace(' ', '_') + '.jpg') }}"
-                    class="plant-img"
-                    onerror="this.src='{{ url_for('static', filename='assets/Placeholder.jpg') }}'"
-                >
+                <img src="{{ url_for('static', filename='assets/' + recommendation|replace(' ', '_') + '.jpg') }}" 
+                     class="plant-img" onerror="this.src='{{ url_for('static', filename='assets/Placeholder.jpg') }}'">
 
-                <!-- Metrics Section -->
-                <div class="section-title">Environmental Metrics</div>
-
+                <div class="section-title">Micro-Climate Data</div>
                 <div class="metric">
                     <label>Temperature ({{ avg_temp }}°C)</label>
-                    <div class="bar">
-                        <div class="fill temp" style="width: {{ avg_temp * 3 }}%"></div>
-                    </div>
+                    <div class="bar"><div class="fill temp" style="width: {{ (avg_temp/45)*100 }}%"></div></div>
                 </div>
-
                 <div class="metric">
                     <label>Humidity ({{ avg_hum }}%)</label>
-                    <div class="bar">
-                        <div class="fill hum" style="width: {{ avg_hum }}%"></div>
-                    </div>
+                    <div class="bar"><div class="fill hum" style="width: {{ avg_hum }}%"></div></div>
                 </div>
-
-                <div class="metric">
-                    <label>Light ({{ avg_lux }} lx)</label>
-                    <div class="bar">
-                        <div class="fill lux" style="width: {{ avg_lux / 10 }}%"></div>
-                    </div>
-                </div>
-
                 <div class="metric">
                     <label>Air Index ({{ avg_air }})</label>
-                    <div class="bar">
-                        <div class="fill air" style="width: {{ avg_air * 20 }}%"></div>
-                    </div>
+                    <div class="bar"><div class="fill air" style="width: {{ (avg_air/5)*100 }}%"></div></div>
                 </div>
 
-                <!-- Survival -->
-                <div class="section-title">Survival Confidence</div>
-                <p class="survival">
-                    {% if survival is defined %}
-                        {{ survival }}%
-                    {% else %}
-                        --
-                    {% endif %}
+                <div class="section-title">Sustainability Index</div>
+                <p class="survival">{{ survival }}% Survival Confidence</p>
+
+                <div class="section-title">Planning & Maintenance</div>
+                <p style="font-size: 0.8rem; opacity: 0.7; margin-bottom: 15px;">
+                    Use AR to simulate placement and view maintenance guidelines.
                 </p>
-
-                <!-- Recommendations -->
-                <div class="section-title">Recommended Actions</div>
-                <ul class="actions">
-                    <li>Ensure proper ventilation</li>
-                    <li>Avoid overwatering</li>
-                    <li>Place near indirect sunlight</li>
-                </ul>
-
+                <a href="{{ url_for('controllers.view_ar', plant_name=recommendation) }}" class="btn btn-main" style="background: #0091ea;">
+                    ✨ Launch AR Maintenance Guide
+                </a>
             </div>
-
             {% endif %}
-
         </div>
+        <p class="text-center mt-4" style="font-size: 0.7rem; opacity: 0.5;">
+            Cyber-Physical System | Urban Greenery Maintenance
+        </p>
     </div>
-
 </body>
 </html>

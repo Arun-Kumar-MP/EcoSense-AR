@@ -1,132 +1,121 @@
+/* Unified main.css */
 body {
-    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    background: linear-gradient(135deg, #112222, #1a3a30, #2d5a27); /* Dark green botanical theme */
     min-height: 100vh;
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container-app {
-    max-width: 420px;
-    margin: auto;
+    width: 100%;
+    max-width: 450px;
     padding: 20px;
 }
 
+/* Glassmorphism Card Style */
 .card-glass {
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .subtitle {
-    font-size: 0.85rem;
-    opacity: 0.8;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: 20px;
 }
 
+/* Capture Button with Hover effects */
 .btn-main {
     background: #00c853;
+    color: white;
     border: none;
-    width: 100%;
-    padding: 14px;
     border-radius: 50px;
-    font-size: 1.1rem;
+    padding: 12px 24px;
     font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    width: 100%;
 }
 
+.btn-main:hover {
+    background: #00e676;
+    transform: scale(1.02);
+    color: white;
+}
+
+/* Results: Score Circle */
 .score-circle {
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    border: 10px solid;
+    border: 8px solid;
+    margin: 25px auto 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px auto;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: bold;
 }
 
-.score-good {
-    border-color: #00e676;
-    color: #00e676;
-}
+.score-good { border-color: #00e676; color: #00e676; }
+.score-medium { border-color: #ffb300; color: #ffb300; }
+.score-bad { border-color: #ff5252; color: #ff5252; }
 
-.score-medium {
-    border-color: #ffb300;
-    color: #ffb300;
-}
-
-.score-bad {
-    border-color: #ff5252;
-    color: #ff5252;
-}
-
-.score-label {
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-}
-
-.plant-name {
-    margin-top: 10px;
-    color: #00e676;
-}
-
-.plant-img {
-    max-height: 200px;
-    width: 100%;
-    object-fit: contain;
-    margin: 15px 0;
-    border-radius: 10px;
-}
-
+/* Metrics & Bars */
 .section-title {
-    margin-top: 20px;
-    font-weight: 600;
     text-align: left;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 20px 0 10px;
+    border-left: 3px solid #00c853;
+    padding-left: 10px;
 }
 
-.metric {
-    margin-top: 10px;
-    text-align: left;
-}
+.metric { margin-bottom: 15px; text-align: left; }
+.metric label { font-size: 0.8rem; opacity: 0.8; }
 
 .bar {
-    height: 10px;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.1);
+    height: 8px;
     border-radius: 10px;
+    margin-top: 5px;
     overflow: hidden;
 }
 
-.fill {
-    height: 100%;
-    border-radius: 10px;
+.fill { height: 100%; border-radius: 10px; transition: width 1s ease-in-out; }
+.temp { background: #ff5252; }
+.hum { background: #40c4ff; }
+.lux { background: #ffd740; }
+.air { background: #b2ff59; }
+
+.plant-img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin: 15px 0;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-.temp { background: #00e5ff; }
-.hum  { background: #00c853; }
-.lux  { background: #ffeb3b; }
-.air  { background: #ff5252; }
+.survival { font-size: 1.5rem; font-weight: bold; color: #00e676; margin: 0; }
+.actions { text-align: left; font-size: 0.85rem; padding-left: 20px; opacity: 0.9; }
 
-.survival {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-top: 5px;
-}
-
-.actions {
-    margin-top: 10px;
-    padding-left: 18px;
-    text-align: left;
-    font-size: 0.9rem;
-}
-
+/* Animations */
 .fade-in {
-    animation: fadeIn 0.6s ease-in-out;
+    animation: fadeIn 0.8s ease-in;
 }
 
 @keyframes fadeIn {
-    from {opacity:0; transform: translateY(10px);}
-    to {opacity:1; transform: translateY(0);}
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
