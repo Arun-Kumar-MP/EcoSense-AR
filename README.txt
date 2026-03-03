@@ -9,3 +9,157 @@ EcoSense-AR is a Flask-based web application for real-time environmental monitor
 - **Web Dashboard**: Clean, responsive web interface displaying sensor readings
 - **Live Updates**: Real-time data visualization with automatic page refresh
 - **Modular Architecture**: Well-structured Flask application with blueprints
+
+Git Workflow:
+- git status → confirm branch.
+- git pull origin <branch> → sync latest.
+- git add . && git commit -m "message"
+- git push origin <branch>
+
+# EcoSense-AR: Environmental Monitoring System
+
+EcoSense-AR is a Flask-based web application for real-time environmental monitoring using Arduino sensors. The system collects temperature, humidity, and gas sensor data through serial communication and displays it in a responsive web interface.
+
+## Features
+
+- **Real-time Data Collection**: Continuous reading from Arduino sensors via serial communication
+- **Data Storage**: SQLite database with SQLAlchemy ORM for persistent storage
+- **Web Dashboard**: Clean, responsive web interface displaying sensor readings
+- **Live Updates**: Real-time data visualization with automatic page refresh
+- **Modular Architecture**: Well-structured Flask application with blueprints
+
+## Installation
+
+### Prerequisites
+
+- Python 3.8 or higher
+- Arduino board with environmental sensors
+- USB connection to Arduino
+
+### Setup Instructions
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Arun-Kumar-MP/EcoSense-AR.git
+   cd EcoSense-AR
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Database Setup**:
+   ```python
+   python
+   >>> from app import app, db
+   >>> from applications.models import SensorReading
+   >>> with app.app_context():
+   ...     db.create_all()
+   ```
+
+## Usage
+
+### Starting the Application
+
+1. **Start the web server**:
+   ```bash
+   python app.py
+   ```
+   The web interface will be available at `http://localhost:5000`
+
+2. **Start data collection** (in a separate terminal):
+   ```bash
+   python serial_reader.py
+   ```
+   This will connect to the Arduino on COM4 port and begin collecting sensor data.
+
+### Arduino Configuration
+
+Ensure your Arduino is configured to send data in the format: `temperature,humidity,ratio`
+- Default serial port: `COM4`
+- Default baud rate: `9600`
+- Expected data format: `25.5,60.2,1.25` (temperature,humidity,gas_ratio)
+
+## Project Structure
+
+```
+EcoSense-AR/
+├── app.py                 # Main Flask application
+├── serial_reader.py       # Arduino serial communication
+├── requirements.txt       # Python dependencies
+├── README.txt            # This file
+├── applications/         # Main application package
+│   ├── controllers.py    # Flask routes and views
+│   ├── models.py         # Database models
+│   └── database.py       # Database configuration
+├── templates/           # HTML templates
+│   └── home.html        # Main dashboard
+├── static/             # Static files
+│   └── styles.css      # Custom styling
+└── instance/           # Database files
+    └── Sensor_Readings.db
+```
+
+## Dependencies
+
+- **Flask 3.0.3**: Web framework
+- **Flask-SQLAlchemy 3.1.1**: Database ORM
+- **SQLAlchemy 2.0.36**: Database toolkit
+- **PySerial 3.5**: Serial communication with Arduino
+
+## Configuration
+
+### Serial Port Settings
+Edit `serial_reader.py` to configure:
+- Port: Default `COM4` (Windows)
+- Baud rate: Default `9600`
+- Timeout: Default `2` seconds
+
+### Database Settings
+Edit `app.py` to configure:
+- Database URI: Default `sqlite:///Sensor_Readings.db`
+- Track modifications: Disabled for performance
+
+## API Endpoints
+
+- `GET /`: Redirects to home page
+- `GET /home`: Main dashboard with sensor readings
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Serial Port Connection Failed**:
+   - Check if Arduino is connected to the correct port
+   - Verify Arduino is powered on and running
+   - Try different COM port if using Windows
+
+2. **No Data Appearing**:
+   - Ensure Arduino is sending data in correct format
+   - Check serial monitor in Arduino IDE for data output
+   - Verify baud rate matches between Arduino and Python
+
+3. **Database Errors**:
+   - Run database creation script if tables don't exist
+   - Check file permissions for database file
+
+### Debug Mode
+
+The application runs in debug mode by default, providing detailed error messages and automatic reloading.
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is part of the EcoSense-AR environmental monitoring initiative.
+
+## Support
+
+For issues and questions, please create an issue in the GitHub repository.
